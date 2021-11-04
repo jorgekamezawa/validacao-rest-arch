@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TipoFormalizacaoDto {
-    @JsonProperty("nome_processo")
-    private String nomeProcesso;
-    @JsonProperty("nome_origem")
-    private String nomeOrigem;
-    @JsonProperty("nome_segmentacao")
-    private String nomeSegmentacao;
+public class FormalizadorDto {
+
+    @JsonProperty("codigo_formalizador")
+    private String codigoFormalizador;
+    @JsonProperty("nome_formalizador")
+    private String nomeFormalizador;
+    @JsonProperty("url_envio_formalizador")
+    private String urlEnvioFormalizador;
 }

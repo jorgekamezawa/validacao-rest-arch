@@ -10,10 +10,11 @@ import java.util.List;
 
 public interface DistribuicaoFormalizacaoRepository extends JpaRepository<DistribuicaoFormalizacaoEntity, Long> {
     @Query("select d from DistribuicaoFormalizacaoEntity d where d.tipoFormalizacaoEntity = :tipoFormalizacaoEntity " +
-            "and d.porcentagemDeDistribuicao > :porcentagemMinima")
-    List<DistribuicaoFormalizacaoEntity> buscarDistribuicaoPorTipoFormalizacaoEPorcentagemMaiorQue(@Param("tipoFormalizacaoEntity") TipoFormalizacaoEntity tipoFormalizacaoEntity,
-                                                                                                   @Param("porcentagemMinima") double porcentagemMinima);
+            "order by codigoDistribuicaoFormalizacao asc")
+    List<DistribuicaoFormalizacaoEntity> buscarDistribuicaoPorTipoFormalizacao(@Param("tipoFormalizacaoEntity") TipoFormalizacaoEntity tipoFormalizacaoEntity);
 
     List<DistribuicaoFormalizacaoEntity> findAllByTipoFormalizacaoEntityAndPorcentagemDeDistribuicaoGreaterThan(TipoFormalizacaoEntity tipoFormalizacaoEntity,
                                                                                                                 double porcentagemMinima);
+
+    List<DistribuicaoFormalizacaoEntity> findAllByTipoFormalizacaoEntityIn(List<TipoFormalizacaoEntity> tipoFormalizacaoEntityLista);
 }

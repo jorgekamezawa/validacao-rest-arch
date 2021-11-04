@@ -3,7 +3,7 @@ package br.com.formalizacaobackoffice.model;
 import lombok.Getter;
 
 @Getter
-public class Processo {
+public class Processo implements Comparable<Processo> {
     private long codigoProcesso;
     private String nomeProcesso;
 
@@ -15,4 +15,14 @@ public class Processo {
         this.codigoProcesso = codigoProcesso;
         this.nomeProcesso = nomeProcesso;
     }
+
+    @Override
+    public int compareTo(Processo processo) {
+        return this.getNomeProcesso().compareTo(processo.getNomeProcesso());
+    }
+
+//    @Override
+//    public int compare(Processo p1, Processo p2) {
+//        return p1.getNomeProcesso().compareTo(p2.getNomeProcesso());
+//    }
 }

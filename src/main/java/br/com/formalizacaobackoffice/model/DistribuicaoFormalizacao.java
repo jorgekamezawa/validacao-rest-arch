@@ -17,4 +17,12 @@ public class DistribuicaoFormalizacao {
     public void incrementarNoContadorDeDistribuicao() {
         this.contadorDeDistribuicao++;
     }
+
+    public void zerarContadorDeDistribuicao() {
+        this.contadorDeDistribuicao = 0;
+    }
+
+    public void atualizarPorcentagem(double porcentagemDeDistribuicao) {
+        this.porcentagemDeDistribuicao = porcentagemDeDistribuicao;
+    }
 }

@@ -8,7 +8,14 @@ import org.springframework.retry.annotation.EnableRetry;
 @SpringBootApplication
 @EnableFeignClients
 @EnableRetry
+//@EnableJpaAuditing(auditorAwareRef = "auditorAware")
 public class FormalizacaobackofficeApplication {
+
+//    @Bean
+//    public AuditorAware<String> auditorAware() {
+//        return new AuditorAwareImpl();
+//    }
+
     public static void main(String[] args) {
         SpringApplication.run(FormalizacaobackofficeApplication.class, args);
     }

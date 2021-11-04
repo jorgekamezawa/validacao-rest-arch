@@ -31,4 +31,8 @@ public class ObjetoAnaliseFormalizacao {
         this.statusAnalise = statusAnalise;
         this.codigoImagem = codigoImagem;
     }
+
+    public void alterarStatus(String statusAnalise) {
+        this.statusAnalise = statusAnalise;
+    }
 }

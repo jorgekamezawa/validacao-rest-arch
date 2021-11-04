@@ -1,5 +1,6 @@
 package br.com.formalizacaobackoffice.mapper;
 
+import br.com.formalizacaobackoffice.dto.TipoFormalizacaoDto;
 import br.com.formalizacaobackoffice.model.*;
 import br.com.formalizacaobackoffice.persistence.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,14 @@ public class TipoFormalizacaoMapper {
                 origemEntity,
                 segmentacaoEntity,
                 objetoAnaliseEntityLista
+        );
+    }
+
+    public TipoFormalizacaoDto converterParaDto(TipoFormalizacao model) {
+        return new TipoFormalizacaoDto(
+                model.getProcesso().getNomeProcesso(),
+                model.getOrigem().getNomeOrigem(),
+                model.getSegmentacao().getNomeSegmentacao()
         );
     }
 }

@@ -27,8 +27,6 @@ public class DistribuicaoFormalizacaoPersistence implements DistribuicaoFormaliz
         TipoFormalizacaoEntity tipoFormalizacaoEntity = tipoFormalizacaoMapper.converterParaEntity(tipoFormalizacao);
         List<DistribuicaoFormalizacaoEntity> distribuicaoFormalizacaoEntityLista =
                 distribuicaoFormalizacaoRepository.findAllByTipoFormalizacaoEntityAndPorcentagemDeDistribuicaoGreaterThan(tipoFormalizacaoEntity, 0.0);
-        List<DistribuicaoFormalizacaoEntity> distribuicaoFormalizacaoEntityLista2 =
-                distribuicaoFormalizacaoRepository.buscarDistribuicaoPorTipoFormalizacaoEPorcentagemMaiorQue(tipoFormalizacaoEntity, 0.0);
         return distribuicaoFormalizacaoMapper.converterParaModel(distribuicaoFormalizacaoEntityLista);
     }
 
@@ -36,5 +34,25 @@ public class DistribuicaoFormalizacaoPersistence implements DistribuicaoFormaliz
     public void salvarDistribuicao(DistribuicaoFormalizacao distribuicaoSelecionada) {
         DistribuicaoFormalizacaoEntity entity = distribuicaoFormalizacaoMapper.converterParaEntity(distribuicaoSelecionada);
         distribuicaoFormalizacaoRepository.save(entity);
+    }
+
+    @Override
+    public List<DistribuicaoFormalizacao> buscarDistribuicaoFormalizacaoPorTipoFormalizacao(TipoFormalizacao tipoFormalizacao) {
+        TipoFormalizacaoEntity tipoFormalizacaoEntity = tipoFormalizacaoMapper.converterParaEntity(tipoFormalizacao);
+        List<DistribuicaoFormalizacaoEntity> distribuicaoFormalizacaoEntityLista = distribuicaoFormalizacaoRepository.buscarDistribuicaoPorTipoFormalizacao(tipoFormalizacaoEntity);
+        return distribuicaoFormalizacaoMapper.converterParaModel(distribuicaoFormalizacaoEntityLista);
+    }
+
+    @Override
+    public List<DistribuicaoFormalizacao> buscarDistribuicaoFormalizacaoPorListaDeTipoFormalizacao(List<TipoFormalizacao> tipoFormalizacaoLista) {
+        List<TipoFormalizacaoEntity> tipoFormalizacaoEntityLista = tipoFormalizacaoMapper.converterParaEntity(tipoFormalizacaoLista);
+        List<DistribuicaoFormalizacaoEntity> distribuicaoFormalizacaoEntityLista = distribuicaoFormalizacaoRepository.findAllByTipoFormalizacaoEntityIn(tipoFormalizacaoEntityLista);
+        return distribuicaoFormalizacaoMapper.converterParaModel(distribuicaoFormalizacaoEntityLista);
+    }
+
+    @Override
+    public void salvarListaDistribuicao(List<DistribuicaoFormalizacao> distribuicaoFormalizacaoLista) {
+        List<DistribuicaoFormalizacaoEntity> distribuicaoFormalizacaoEntityLista = distribuicaoFormalizacaoMapper.converterParaEntity(distribuicaoFormalizacaoLista);
+        distribuicaoFormalizacaoRepository.saveAll(distribuicaoFormalizacaoEntityLista);
     }
 }

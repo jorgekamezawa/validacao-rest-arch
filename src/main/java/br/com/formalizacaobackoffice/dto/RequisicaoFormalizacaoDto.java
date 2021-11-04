@@ -1,4 +1,4 @@
-package br.com.formalizacaobackoffice.dto.request;
+package br.com.formalizacaobackoffice.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

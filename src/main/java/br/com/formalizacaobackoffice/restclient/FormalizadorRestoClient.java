@@ -1,6 +1,6 @@
 package br.com.formalizacaobackoffice.restclient;
 
-import br.com.formalizacaobackoffice.dto.request.RequisicaoFormalizacaoDto;
+import br.com.formalizacaobackoffice.dto.RequisicaoFormalizacaoDto;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;

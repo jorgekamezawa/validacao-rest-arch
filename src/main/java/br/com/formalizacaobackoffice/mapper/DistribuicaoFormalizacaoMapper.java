@@ -1,5 +1,8 @@
 package br.com.formalizacaobackoffice.mapper;
 
+import br.com.formalizacaobackoffice.dto.FormalizadorDto;
+import br.com.formalizacaobackoffice.dto.TipoFormalizacaoDto;
+import br.com.formalizacaobackoffice.dto.DistribuicaoFormalizacaoDto;
 import br.com.formalizacaobackoffice.model.DistribuicaoFormalizacao;
 import br.com.formalizacaobackoffice.model.Formalizador;
 import br.com.formalizacaobackoffice.model.TipoFormalizacao;
@@ -38,6 +41,14 @@ public class DistribuicaoFormalizacaoMapper {
                 entity.getContadorDeDistribuicao());
     }
 
+    public List<DistribuicaoFormalizacaoEntity> converterParaEntity(List<DistribuicaoFormalizacao> modelLista) {
+        List<DistribuicaoFormalizacaoEntity> entitylista = new ArrayList<>();
+        modelLista.forEach(model -> {
+            entitylista.add(converterParaEntity(model));
+        });
+        return entitylista;
+    }
+
     public DistribuicaoFormalizacaoEntity converterParaEntity(DistribuicaoFormalizacao model) {
         TipoFormalizacaoEntity tipoFormalizacaoEntity = tipoFormalizacaoMapper.converterParaEntity(model.getTipoFormalizacao());
         FormalizadorEntity formalizadorEntity = formalizadorMapper.converterParaEntity(model.getFormalizador());
@@ -47,6 +58,25 @@ public class DistribuicaoFormalizacaoMapper {
                 formalizadorEntity,
                 model.getPorcentagemDeDistribuicao(),
                 model.getContadorDeDistribuicao()
+        );
+    }
+
+    public List<DistribuicaoFormalizacaoDto> converterParaDto(List<DistribuicaoFormalizacao> modelLista) {
+        List<DistribuicaoFormalizacaoDto> dtoLista = new ArrayList<>();
+        modelLista.forEach(model -> {
+            dtoLista.add(converterParaDto(model));
+        });
+        return dtoLista;
+    }
+
+    private DistribuicaoFormalizacaoDto converterParaDto(DistribuicaoFormalizacao model) {
+        TipoFormalizacaoDto tipoFormalizacaoDto = tipoFormalizacaoMapper.converterParaDto(model.getTipoFormalizacao());
+        FormalizadorDto formalizadorDto = formalizadorMapper.converterParaDto(model.getFormalizador());
+        return new DistribuicaoFormalizacaoDto(
+                model.getCodigoDistribuicaoFormalizacao(),
+                tipoFormalizacaoDto,
+                formalizadorDto,
+                model.getPorcentagemDeDistribuicao()
         );
     }
 }

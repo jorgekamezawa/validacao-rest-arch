@@ -5,6 +5,7 @@ import br.com.formalizacaobackoffice.persistence.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -32,6 +33,14 @@ public class FormalizacaoMapper {
                 model.getStatus(),
                 model.getDataHoraFormalizacaoUltimaAtualizacaoDeStatus()
         );
+    }
+
+    public List<Formalizacao> converterParaModel(List<FormalizacaoEntity> entityLista) {
+        List<Formalizacao> modelLista = new ArrayList<>();
+        entityLista.forEach(entity -> {
+            modelLista.add(converterParaModel(entity));
+        });
+        return modelLista;
     }
 
     public Formalizacao converterParaModel(FormalizacaoEntity entity) {

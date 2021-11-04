@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Component
 public class FormalizacaoPersistence implements FormalizacaoPersistenceAdapter {
     @Autowired
@@ -29,5 +31,10 @@ public class FormalizacaoPersistence implements FormalizacaoPersistenceAdapter {
     public Formalizacao buscarFormalizacaoPorId(String codigoFormalizacao) {
         FormalizacaoEntity formalizacaoEntity = formalizacaoRepository.findById(codigoFormalizacao).orElseThrow(() -> new FormalizacaoNotFoundException(""));
         return formalizacaoMapper.converterParaModel(formalizacaoEntity);
+    }
+
+    @Override
+    public List<Formalizacao> buscarTodosFormalizacao() {
+        return formalizacaoMapper.converterParaModel(formalizacaoRepository.findAll());
     }
 }

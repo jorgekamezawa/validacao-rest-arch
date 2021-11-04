@@ -38,4 +38,9 @@ public class Formalizacao {
             this.objetoAnaliseFormalizacaoLista.add(objetoAnaliseFormalizacao);
         }
     }
+
+    public void alterarStatus(String status) {
+        this.status = status;
+        this.dataHoraFormalizacaoUltimaAtualizacaoDeStatus = LocalDateTime.now();
+    }
 }

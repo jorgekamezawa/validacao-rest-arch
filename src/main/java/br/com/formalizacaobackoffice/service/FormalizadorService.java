@@ -1,6 +1,6 @@
 package br.com.formalizacaobackoffice.service;
 
-import br.com.formalizacaobackoffice.dto.request.RequisicaoFormalizacaoDto;
+import br.com.formalizacaobackoffice.dto.RequisicaoFormalizacaoDto;
 import br.com.formalizacaobackoffice.exception.FormalizadorRestClientException;
 import br.com.formalizacaobackoffice.model.Formalizacao;
 import br.com.formalizacaobackoffice.restclient.FormalizadorRestoClient;
