@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 public class Pessoa {
 //    private long idPessoa;
     private String codigoPessoa;
-    private String codigoPessoaemporario;
+    private String codigoPessoaTemporario;
     private Formalizacao formalizacao;
 
-    public Pessoa(String codigoPessoa, String codigoPessoaemporario) {
+    public Pessoa(String codigoPessoa, String codigoPessoaTemporario) {
         this.codigoPessoa = codigoPessoa;
-        this.codigoPessoaemporario = codigoPessoaemporario;
+        this.codigoPessoaTemporario = codigoPessoaTemporario;
     }
 
 //    public Pessoa(long idPessoa, String codigoPessoa, String codigoPessoaemporario) {

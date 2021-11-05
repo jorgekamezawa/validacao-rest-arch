@@ -12,6 +12,7 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+//TODO: Criar um CRUD para os novos fluxos, entoa quando chegar um novo fluxo é só cadastrar na base que o sistema aceitara esse nvoo fluxo facilmente
 public class Formalizacao {
     private String codigoFormalizacao;
     private TipoFormalizacao tipoFormalizacao;

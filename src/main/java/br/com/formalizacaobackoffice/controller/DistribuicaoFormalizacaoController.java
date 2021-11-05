@@ -17,16 +17,20 @@ public class DistribuicaoFormalizacaoController {
     private DistribuicaoFormalizacaoService distribuicaoFormalizacaoService;
 
     @GetMapping
-    public ResponseEntity<?> alterarPorcentagemDaDistribicao(@RequestParam(name = "nome_processo") String nomeProcesso,
-                                                             @RequestParam(name = "nome_origem") String nomeOrigem,
-                                                             @RequestParam(name = "nome_segmentacao") String nomeSegmentacao) {
+    public ResponseEntity<List<DistribuicaoFormalizacaoDto>> buscarListaDistribuicaoFormalizacaoPorTipoFormalizacao(
+            @RequestParam(name = "nome_processo") String nomeProcesso,
+            @RequestParam(name = "nome_origem") String nomeOrigem,
+            @RequestParam(name = "nome_segmentacao") String nomeSegmentacao) {
+
         TipoFormalizacaoDto tipoFormalizacaoDto = new TipoFormalizacaoDto(nomeProcesso, nomeOrigem, nomeSegmentacao);
-        List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoLista = distribuicaoFormalizacaoService.buscarListaDistribuicaoFormalizacaoProTipoFormalizacao(tipoFormalizacaoDto);
+        List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoLista = distribuicaoFormalizacaoService.buscarListaDistribuicaoFormalizacaoPorTipoFormalizacao(tipoFormalizacaoDto);
         return ResponseEntity.ok(distribuicaoFormalizacaoLista);
     }
 
     @PutMapping
-    public ResponseEntity<?> alterarPorcentagemDaDistribuicao(@RequestBody List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoListaDto) {
+    public ResponseEntity<List<DistribuicaoFormalizacaoDto>> alterarPorcentagemDaDistribuicao(
+            @RequestBody List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoListaDto) {
+
         List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoLista = distribuicaoFormalizacaoService.alterarPorcentagemDeListaDeDistribuicaoFormalizacao(distribuicaoFormalizacaoListaDto);
         return ResponseEntity.ok(distribuicaoFormalizacaoLista);
     }

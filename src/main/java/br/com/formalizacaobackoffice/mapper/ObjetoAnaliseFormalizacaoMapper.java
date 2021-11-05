@@ -1,8 +1,8 @@
 package br.com.formalizacaobackoffice.mapper;
 
-import br.com.formalizacaobackoffice.model.MotivoDevolucaoFormalizacao;
 import br.com.formalizacaobackoffice.model.ObjetoAnalise;
 import br.com.formalizacaobackoffice.model.ObjetoAnaliseFormalizacao;
+import br.com.formalizacaobackoffice.persistence.entity.MotivoDevolucaoFormalizacaoEntity;
 import br.com.formalizacaobackoffice.persistence.entity.ObjetoAnaliseEntity;
 import br.com.formalizacaobackoffice.persistence.entity.ObjetoAnaliseFormalizacaoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +30,18 @@ public class ObjetoAnaliseFormalizacaoMapper {
 
     public ObjetoAnaliseFormalizacaoEntity converterParaEntity(ObjetoAnaliseFormalizacao model) {
         ObjetoAnaliseEntity objetoAnaliseEntity = objetoAnaliseMapper.converterParaEntity(model.getObjetoAnalise());
-        return new ObjetoAnaliseFormalizacaoEntity(
+        ObjetoAnaliseFormalizacaoEntity objetoAnaliseFormalizacaoEntity = new ObjetoAnaliseFormalizacaoEntity(
+                model.getCodigoObjetoAnaliseFormalizacao(),
                 objetoAnaliseEntity,
                 model.getStatusAnalise(),
                 model.getCodigoImagem()
         );
+        if (model.getMotivoDevolucaoFormalizacaoLista() != null) {
+            List<MotivoDevolucaoFormalizacaoEntity> motivoDevolucaoFormalizacaoEntityLista = motivoDevolucaoFormalizacaoMapper.converterParaEntity(model.getMotivoDevolucaoFormalizacaoLista());
+            objetoAnaliseFormalizacaoEntity.adicionarMotivoDevolucaoFormalizacao(motivoDevolucaoFormalizacaoEntityLista);
+        }
+
+        return objetoAnaliseFormalizacaoEntity;
     }
 
     public List<ObjetoAnaliseFormalizacao> converterParaModel(List<ObjetoAnaliseFormalizacaoEntity> entityLista) {

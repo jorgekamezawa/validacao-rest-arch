@@ -10,7 +10,7 @@ public class PessoaMapper {
     public PessoaEntity converterParaEntity(Pessoa model) {
         return new PessoaEntity(
                 model.getCodigoPessoa(),
-                model.getCodigoPessoaemporario()
+                model.getCodigoPessoaTemporario()
         );
     }
 

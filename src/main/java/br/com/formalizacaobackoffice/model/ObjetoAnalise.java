@@ -9,6 +9,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+//TODO: pensar em nome como tipo objeto analise
 public class ObjetoAnalise {
     private long codigoObjetoAnalise;
     private String nomeObjetoAnalise;

@@ -27,12 +27,21 @@ public class ObjetoAnaliseFormalizacaoEntity {
     private ObjetoAnaliseEntity objetoAnaliseEntity;
     @Column(name = "status_analise", nullable = false)
     private String statusAnalise;
-    @OneToMany(mappedBy = "objetoAnaliseFormalizacaoEntity", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "objetoAnaliseFormalizacaoEntity", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MotivoDevolucaoFormalizacaoEntity> motivoDevolucaoFormalizacaoEntityLista = new ArrayList<>();
     @Column(name = "codigo_imagem", nullable = false)
     private String codigoImagem;
 
-    public ObjetoAnaliseFormalizacaoEntity(ObjetoAnaliseEntity objetoAnaliseEntity, String statusAnalise, String codigoImagem) {
+    public ObjetoAnaliseFormalizacaoEntity(long codigoObjetoAnaliseFormalizacao, ObjetoAnaliseEntity objetoAnaliseEntity, String statusAnalise, List<MotivoDevolucaoFormalizacaoEntity> motivoDevolucaoFormalizacaoEntityLista, String codigoImagem) {
+        this.codigoObjetoAnaliseFormalizacao = codigoObjetoAnaliseFormalizacao;
+        this.objetoAnaliseEntity = objetoAnaliseEntity;
+        this.statusAnalise = statusAnalise;
+        this.motivoDevolucaoFormalizacaoEntityLista = motivoDevolucaoFormalizacaoEntityLista;
+        this.codigoImagem = codigoImagem;
+    }
+
+    public ObjetoAnaliseFormalizacaoEntity(long codigoObjetoAnaliseFormalizacao, ObjetoAnaliseEntity objetoAnaliseEntity, String statusAnalise, String codigoImagem) {
+        this.codigoObjetoAnaliseFormalizacao = codigoObjetoAnaliseFormalizacao;
         this.objetoAnaliseEntity = objetoAnaliseEntity;
         this.statusAnalise = statusAnalise;
         this.codigoImagem = codigoImagem;
@@ -40,5 +49,14 @@ public class ObjetoAnaliseFormalizacaoEntity {
 
     public void adicionarFormalizacao(FormalizacaoEntity formalizacaoEntity) {
         this.formalizacaoEntity = formalizacaoEntity;
+    }
+
+    public void adicionarMotivoDevolucaoFormalizacao(List<MotivoDevolucaoFormalizacaoEntity> motivoDevolucaoFormalizacaoEntityLista) {
+        motivoDevolucaoFormalizacaoEntityLista.forEach(motivoDevolucaoFormalizacaoEntity -> {
+            if (!this.motivoDevolucaoFormalizacaoEntityLista.contains(motivoDevolucaoFormalizacaoEntity)) {
+                this.motivoDevolucaoFormalizacaoEntityLista.add(motivoDevolucaoFormalizacaoEntity);
+            }
+            motivoDevolucaoFormalizacaoEntity.adicionarObjetoAnaliseFormalizacao(this);
+        });
     }
 }

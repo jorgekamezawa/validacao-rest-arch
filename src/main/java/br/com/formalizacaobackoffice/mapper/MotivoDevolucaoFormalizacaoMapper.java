@@ -29,12 +29,10 @@ public class MotivoDevolucaoFormalizacaoMapper {
 
     public MotivoDevolucaoFormalizacaoEntity converterParaEntity(MotivoDevolucaoFormalizacao model) {
         MotivoDevolucaoEntity motivoDevolucaoEntity = motivoDevolucaoMapper.converterParaEntity(model.getMotivoDevolucao());
-        ObjetoAnaliseFormalizacaoEntity objetoAnaliseFormalizacaoEntity = objetoAnaliseFormalizacaoMapper.converterParaEntity(model.getObjetoAnaliseFormalizacao());
         return new MotivoDevolucaoFormalizacaoEntity(
                 model.getCodigoMotivoDevolucaoFormalizacao(),
                 motivoDevolucaoEntity,
-                model.getStatus(),
-                objetoAnaliseFormalizacaoEntity
+                model.getStatus()
         );
     }
 

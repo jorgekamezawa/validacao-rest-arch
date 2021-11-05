@@ -58,7 +58,7 @@ public class DistribuicaoFormalizacaoService {
         distribuicaoFormalizacaoPersistenceAdapter.salvarDistribuicao(distribuicaoSelecionada);
     }
 
-    public List<DistribuicaoFormalizacaoDto> buscarListaDistribuicaoFormalizacaoProTipoFormalizacao(TipoFormalizacaoDto tipoFormalizacaoDto) {
+    public List<DistribuicaoFormalizacaoDto> buscarListaDistribuicaoFormalizacaoPorTipoFormalizacao(TipoFormalizacaoDto tipoFormalizacaoDto) {
         TipoFormalizacao tipoFormalizacao = tipoFormalizacaoService.buscarTipoFormalizacaoPelosNomesDasCategorias(
                 tipoFormalizacaoDto.getNomeProcesso(), tipoFormalizacaoDto.getNomeOrigem(), tipoFormalizacaoDto.getNomeSegmentacao());
 

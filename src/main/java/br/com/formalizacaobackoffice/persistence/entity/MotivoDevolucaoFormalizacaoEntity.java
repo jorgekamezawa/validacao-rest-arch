@@ -26,4 +26,14 @@ public class MotivoDevolucaoFormalizacaoEntity {
     @ManyToOne
     @JoinColumn(name = "objeto_analise_formalizacao_codigo")
     private ObjetoAnaliseFormalizacaoEntity objetoAnaliseFormalizacaoEntity;
+
+    public MotivoDevolucaoFormalizacaoEntity(long codigoMotivoDevolucaoFormalizacao, MotivoDevolucaoEntity motivoDevolucaoEntity, String status) {
+        this.codigoMotivoDevolucaoFormalizacao = codigoMotivoDevolucaoFormalizacao;
+        this.motivoDevolucaoEntity = motivoDevolucaoEntity;
+        this.status = status;
+    }
+
+    public void adicionarObjetoAnaliseFormalizacao(ObjetoAnaliseFormalizacaoEntity objetoAnaliseFormalizacaoEntity) {
+        this.objetoAnaliseFormalizacaoEntity = objetoAnaliseFormalizacaoEntity;
+    }
 }
