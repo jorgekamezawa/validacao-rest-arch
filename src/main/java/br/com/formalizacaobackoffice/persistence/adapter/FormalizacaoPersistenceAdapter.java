@@ -8,6 +8,4 @@ public interface FormalizacaoPersistenceAdapter {
     void salvarFormalizacao(Formalizacao formalizacao);
 
     Formalizacao buscarFormalizacaoPorId(String codigoFormalizacao);
-
-    List<Formalizacao> buscarTodosFormalizacao();
 }

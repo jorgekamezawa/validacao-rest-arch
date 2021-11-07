@@ -2,8 +2,8 @@ package br.com.formalizacaobackoffice.exception;
 
 import br.com.formalizacaobackoffice.exception.model.ExceptionModel;
 
-public class MotivoDevolucaoNotFoundException extends ExceptionModel {
-    public MotivoDevolucaoNotFoundException(String message) {
+public class DistribuicaoInternalServerErrorException extends ExceptionModel {
+    public DistribuicaoInternalServerErrorException(String message) {
         super(message);
     }
 }

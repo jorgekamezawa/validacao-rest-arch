@@ -11,7 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FormalizadorDto {
-
     @JsonProperty("codigo_formalizador")
     private String codigoFormalizador;
     @JsonProperty("nome_formalizador")

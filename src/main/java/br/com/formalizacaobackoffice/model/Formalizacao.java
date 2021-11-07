@@ -3,6 +3,7 @@ package br.com.formalizacaobackoffice.model;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.UUID;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-//TODO: Criar um CRUD para os novos fluxos, entoa quando chegar um novo fluxo é só cadastrar na base que o sistema aceitara esse nvoo fluxo facilmente
+@ToString
 public class Formalizacao {
     private String codigoFormalizacao;
     private TipoFormalizacao tipoFormalizacao;
@@ -30,14 +31,15 @@ public class Formalizacao {
         this.dataHoraFormalizacaoUltimaAtualizacaoDeStatus = LocalDateTime.now();
     }
 
-    public void adicionarDistribuicao(DistribuicaoFormalizacao distribuicaoFormalizacao) {
-        this.distribuicaoFormalizacao = distribuicaoFormalizacao;
-    }
-
     public void adicionarObjetoAnaliseFormalizacao(ObjetoAnaliseFormalizacao objetoAnaliseFormalizacao) {
         if (!this.objetoAnaliseFormalizacaoLista.contains(objetoAnaliseFormalizacao)) {
             this.objetoAnaliseFormalizacaoLista.add(objetoAnaliseFormalizacao);
+            objetoAnaliseFormalizacao.atribuirFormalizacao(this);
         }
+    }
+
+    public void adicionarDistribuicao(DistribuicaoFormalizacao distribuicaoFormalizacao) {
+        this.distribuicaoFormalizacao = distribuicaoFormalizacao;
     }
 
     public void alterarStatus(String status) {

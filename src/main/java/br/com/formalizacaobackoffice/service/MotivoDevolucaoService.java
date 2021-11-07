@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class MotivoDevolucaoService {
     @Autowired
     private MotivoDevolucaoPersistenceAdapter motivoDevolucaoPersistenceAdapter;
+
     public MotivoDevolucao buscarMotivoDevolucaoPorNome(String nomeMotivoDevolucao) {
         return motivoDevolucaoPersistenceAdapter.buscarMotivoDevolucaoPorNome(nomeMotivoDevolucao);
     }

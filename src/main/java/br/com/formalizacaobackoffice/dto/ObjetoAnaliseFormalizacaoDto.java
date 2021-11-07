@@ -5,12 +5,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ObjetoAnaliseFormalizacaoDto {
-
     @JsonProperty("codigo_objeto_analise_formalizacao")
     private long codigoObjetoAnaliseFormalizacaoDto;
     @JsonProperty("nome_objeto_analise")
@@ -19,5 +18,5 @@ public class ObjetoAnaliseFormalizacaoDto {
     private String statusObjetoAnaliseDto;
     @JsonProperty("motivo_devolucao")
     @JsonIgnoreProperties
-    private List<MotivoDevolucaoFormalizacaoDto> motivoDevolucaoFormalizacaoDtoLista;
+    private List<MotivoDevolucaoFormalizacaoDto> motivoDevolucaoFormalizacaoDtoLista = new ArrayList<>();
 }

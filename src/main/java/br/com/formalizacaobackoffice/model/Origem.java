@@ -1,23 +1,15 @@
 package br.com.formalizacaobackoffice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
-public class Origem implements Comparable<Origem> {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Origem {
     private long codigoOrigem;
     private String nomeOrigem;
-
-    public Origem(String nomeOrigem) {
-        this.nomeOrigem = nomeOrigem;
-    }
-
-    public Origem(long codigoOrigem, String nomeOrigem) {
-        this.codigoOrigem = codigoOrigem;
-        this.nomeOrigem = nomeOrigem;
-    }
-
-    @Override
-    public int compareTo(Origem origem) {
-        return this.getNomeOrigem().compareTo(origem.getNomeOrigem());
-    }
 }

@@ -34,6 +34,16 @@ public class FormalizacaoEntity {
     @Column(name = "dataHora_formalizacao_ultima_atualizacao_status", nullable = false)
     private LocalDateTime dataHoraFormalizacaoUltimaAtualizacaoDeStatus;
 
+    public FormalizacaoEntity(String codigoFormalizacao, TipoFormalizacaoEntity tipoFormalizacaoEntity, PessoaEntity pessoaEntity,
+                              DistribuicaoFormalizacaoEntity distribuicaoFormalizacaoEntity, String status, LocalDateTime dataHoraFormalizacaoUltimaAtualizacaoDeStatus) {
+        this.codigoFormalizacao = codigoFormalizacao;
+        this.tipoFormalizacaoEntity = tipoFormalizacaoEntity;
+        this.pessoaEntity = pessoaEntity;
+        this.distribuicaoFormalizacaoEntity = distribuicaoFormalizacaoEntity;
+        this.status = status;
+        this.dataHoraFormalizacaoUltimaAtualizacaoDeStatus = dataHoraFormalizacaoUltimaAtualizacaoDeStatus;
+    }
+
     public void adicionarObjetoAnaliseFormalizacao(List<ObjetoAnaliseFormalizacaoEntity> objetoAnaliseFormalizacaoEntityLista) {
         objetoAnaliseFormalizacaoEntityLista.forEach(objetoAnaliseFormalizacaoEntity -> {
             if (!this.objetoAnaliseFormalizacaoEntityLista.contains(objetoAnaliseFormalizacaoEntity)) {

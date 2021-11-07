@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FormalizadorMapper {
-
     public Formalizador converterParaModel(FormalizadorEntity entity) {
         return new Formalizador(
                 entity.getCodigoFormalizador(),

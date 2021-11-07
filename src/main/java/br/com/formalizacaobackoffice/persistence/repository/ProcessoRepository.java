@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ProcessoRepository extends JpaRepository<ProcessoEntity, Long> {
-
     Optional<ProcessoEntity> findByNomeProcesso(String nomeProcesso);
 }

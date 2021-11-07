@@ -32,14 +32,6 @@ public class ObjetoAnaliseFormalizacaoEntity {
     @Column(name = "codigo_imagem", nullable = false)
     private String codigoImagem;
 
-    public ObjetoAnaliseFormalizacaoEntity(long codigoObjetoAnaliseFormalizacao, ObjetoAnaliseEntity objetoAnaliseEntity, String statusAnalise, List<MotivoDevolucaoFormalizacaoEntity> motivoDevolucaoFormalizacaoEntityLista, String codigoImagem) {
-        this.codigoObjetoAnaliseFormalizacao = codigoObjetoAnaliseFormalizacao;
-        this.objetoAnaliseEntity = objetoAnaliseEntity;
-        this.statusAnalise = statusAnalise;
-        this.motivoDevolucaoFormalizacaoEntityLista = motivoDevolucaoFormalizacaoEntityLista;
-        this.codigoImagem = codigoImagem;
-    }
-
     public ObjetoAnaliseFormalizacaoEntity(long codigoObjetoAnaliseFormalizacao, ObjetoAnaliseEntity objetoAnaliseEntity, String statusAnalise, String codigoImagem) {
         this.codigoObjetoAnaliseFormalizacao = codigoObjetoAnaliseFormalizacao;
         this.objetoAnaliseEntity = objetoAnaliseEntity;

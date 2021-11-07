@@ -9,7 +9,8 @@ import org.springframework.stereotype.Service;
 public class PessoaService {
     @Autowired
     private PessoaPersistenceAdapter pessoaPersistenceAdapter;
-    public Pessoa salvarPessoa(Pessoa pessoa) {
-        return pessoaPersistenceAdapter.salvarPessoa(pessoa);
+
+    public boolean validarSePessoaExiste(String codigoPessoa) {
+        return pessoaPersistenceAdapter.validarSePessoaExiste(codigoPessoa);
     }
 }

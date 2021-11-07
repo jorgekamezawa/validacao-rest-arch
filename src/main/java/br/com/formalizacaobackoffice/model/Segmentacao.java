@@ -1,25 +1,15 @@
 package br.com.formalizacaobackoffice.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
-
-import java.util.Comparator;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Getter
-public class Segmentacao implements Comparable<Segmentacao> {
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+public class Segmentacao {
     private long codigoSegmentacao;
     private String nomeSegmentacao;
-
-    public Segmentacao(String nomeSegmentacao) {
-        this.nomeSegmentacao = nomeSegmentacao;
-    }
-
-    public Segmentacao(long codigoSegmentacao, String nomeSegmentacao) {
-        this.codigoSegmentacao = codigoSegmentacao;
-        this.nomeSegmentacao = nomeSegmentacao;
-    }
-
-    @Override
-    public int compareTo(Segmentacao segmentacao) {
-        return this.getNomeSegmentacao().compareTo(segmentacao.getNomeSegmentacao());
-    }
 }

@@ -1,7 +1,10 @@
 package br.com.formalizacaobackoffice.mapper;
 
 import br.com.formalizacaobackoffice.model.*;
-import br.com.formalizacaobackoffice.persistence.entity.*;
+import br.com.formalizacaobackoffice.persistence.entity.DistribuicaoFormalizacaoEntity;
+import br.com.formalizacaobackoffice.persistence.entity.FormalizacaoEntity;
+import br.com.formalizacaobackoffice.persistence.entity.PessoaEntity;
+import br.com.formalizacaobackoffice.persistence.entity.TipoFormalizacaoEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,14 +25,12 @@ public class FormalizacaoMapper {
     public FormalizacaoEntity converterParaEntity(Formalizacao model) {
         TipoFormalizacaoEntity tipoFormalizacaoEntity = tipoFormalizacaoMapper.converterParaEntity(model.getTipoFormalizacao());
         PessoaEntity pessoaEntity = pessoaMapper.converterParaEntity(model.getPessoa());
-        DistribuicaoFormalizacaoEntity distribuicaoFormalizacaoEntity = model.getDistribuicaoFormalizacao() == null ? null : distribuicaoFormalizacaoMapper.converterParaEntity(model.getDistribuicaoFormalizacao());
-        List<ObjetoAnaliseFormalizacaoEntity> objetoAnaliseFormalizacaoEntityLista = model.getObjetoAnaliseFormalizacaoLista() == null ? null : objetoAnaliseFormalizacaoMapper.converterParaEntity(model.getObjetoAnaliseFormalizacaoLista());
+        DistribuicaoFormalizacaoEntity distribuicaoFormalizacaoEntity = distribuicaoFormalizacaoMapper.converterParaEntity(model.getDistribuicaoFormalizacao());
         return new FormalizacaoEntity(
                 model.getCodigoFormalizacao(),
                 tipoFormalizacaoEntity,
                 pessoaEntity,
                 distribuicaoFormalizacaoEntity,
-                objetoAnaliseFormalizacaoEntityLista,
                 model.getStatus(),
                 model.getDataHoraFormalizacaoUltimaAtualizacaoDeStatus()
         );

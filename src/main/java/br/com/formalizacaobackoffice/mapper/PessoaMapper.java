@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PessoaMapper {
-
     public PessoaEntity converterParaEntity(Pessoa model) {
         return new PessoaEntity(
                 model.getCodigoPessoa(),
@@ -20,20 +19,4 @@ public class PessoaMapper {
                 entity.getCodigoPessoaTemporario()
         );
     }
-
-//    public PessoaEntity converterParaEntity(Pessoa model) {
-//        return new PessoaEntity(
-//                model.getIdPessoa(),
-//                model.getCodigoPessoa(),
-//                model.getCodigoPessoaemporario()
-//        );
-//    }
-//
-//    public Pessoa converterParaModel(PessoaEntity entity) {
-//        return new Pessoa(
-//                entity.getIdPessoa(),
-//                entity.getCodigoPessoa(),
-//                entity.getCodigoPessoaTemporario()
-//        );
-//    }
 }

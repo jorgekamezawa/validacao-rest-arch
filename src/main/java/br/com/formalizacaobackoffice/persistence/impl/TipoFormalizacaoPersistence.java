@@ -39,7 +39,7 @@ public class TipoFormalizacaoPersistence implements TipoFormalizacaoPersistenceA
 
         TipoFormalizacaoEntity tipoFormalizacaoEntity = tipoFormalizacaoRepository.findByProcessoEntityAndOrigemEntityAndSegmentacaoEntity(processoEntity, origemEntity, segmentacaoEntity)
                 .orElseThrow(() -> new TipoFormalizacaoNotFoundException("Tipo formalizacao de processo " + processo.getNomeProcesso() +
-                        ", origem " + origem.getNomeOrigem() + " e segmentacao " + segmentacao.getNomeSegmentacao()));
+                        ", origem " + origem.getNomeOrigem() + " e segmentacao " + segmentacao.getNomeSegmentacao() + " nao encontrado!"));
         return tipoFormalizacaoMapper.converterParaModel(tipoFormalizacaoEntity);
     }
 }

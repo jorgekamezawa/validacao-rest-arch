@@ -1,6 +1,8 @@
 package br.com.formalizacaobackoffice.exception;
 
-public class ProcessoNotFoundExeption extends RuntimeException {
+import br.com.formalizacaobackoffice.exception.model.ExceptionModel;
+
+public class ProcessoNotFoundExeption extends ExceptionModel {
     public ProcessoNotFoundExeption(String message) {
         super(message);
     }

@@ -1,6 +1,8 @@
 package br.com.formalizacaobackoffice.exception;
 
-public class FormalizacaoNotFoundException extends RuntimeException {
+import br.com.formalizacaobackoffice.exception.model.ExceptionModel;
+
+public class FormalizacaoNotFoundException extends ExceptionModel {
     public FormalizacaoNotFoundException(String message) {
         super(message);
     }

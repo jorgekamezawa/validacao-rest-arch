@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface SegmentacaoRepository extends JpaRepository<SegmentacaoEntity, Long> {
-
     Optional<SegmentacaoEntity> findByNomeSegmentacao(String nomeSegmentacao);
 }

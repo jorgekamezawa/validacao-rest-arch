@@ -1,8 +1,10 @@
 package br.com.formalizacaobackoffice.service;
 
-import br.com.formalizacaobackoffice.dto.TipoFormalizacaoDto;
 import br.com.formalizacaobackoffice.dto.DistribuicaoFormalizacaoDto;
-import br.com.formalizacaobackoffice.exception.DistribuicaoException;
+import br.com.formalizacaobackoffice.dto.TipoFormalizacaoDto;
+import br.com.formalizacaobackoffice.exception.DistribuicaoInternalServerErrorException;
+import br.com.formalizacaobackoffice.exception.DistribuicaoNotAcceptableException;
+import br.com.formalizacaobackoffice.exception.DistribuicaoNotFoundException;
 import br.com.formalizacaobackoffice.mapper.DistribuicaoFormalizacaoMapper;
 import br.com.formalizacaobackoffice.model.DistribuicaoFormalizacao;
 import br.com.formalizacaobackoffice.model.Formalizacao;
@@ -36,20 +38,21 @@ public class DistribuicaoFormalizacaoService {
         DistribuicaoFormalizacao distribuicaoSelecionada;
         if (somaDeTodosContadores == 0) {
             distribuicaoSelecionada = distribuicaoFormalizacaoListaPorTipoFormalizacao.stream().max(Comparator.comparing(DistribuicaoFormalizacao::getPorcentagemDeDistribuicao))
-                    .orElseThrow(() -> new DistribuicaoException("Erro ao buscar a DistribuicaoFormalizacao quando soma de contadores  é igual a 0!"));
+                    .orElseThrow(() -> new DistribuicaoInternalServerErrorException("Erro ao buscar a DistribuicaoFormalizacao quando soma de contadores é igual a 0!"));
         } else {
             distribuicaoSelecionada = distribuicaoFormalizacaoListaPorTipoFormalizacao.stream()
                     .sorted(Comparator.comparing(DistribuicaoFormalizacao::getPorcentagemDeDistribuicao).reversed())
                     .filter(d -> {
                         double calculoPorcentagem = (d.getContadorDeDistribuicao() * 100.00) / somaDeTodosContadores;
                         return calculoPorcentagem <= d.getPorcentagemDeDistribuicao();
-                    }).findFirst().orElseThrow(() -> new DistribuicaoException("Erro ao executar a regra de distribuicao pra formalizacao: " + formalizacao.getCodigoFormalizacao()));
+                    })
+                    .findFirst().orElseThrow(() -> new DistribuicaoInternalServerErrorException("Erro ao executar a regra de distribuicao pra formalizacao: " + formalizacao.getCodigoFormalizacao()));
         }
         formalizacao.adicionarDistribuicao(distribuicaoSelecionada);
         formalizadorService.enviarFormalizacaoParaFormalizador(formalizacao);
         distribuicaoSelecionada.incrementarNoContadorDeDistribuicao();
         formalizacao.alterarStatus("ENVIADO");
-        formalizacao.getObjetoAnaliseFormalizacaoLista().forEach(objeto -> objeto.alterarStatus("ENVIADO"));
+        formalizacao.getObjetoAnaliseFormalizacaoLista().forEach(objetoAnaliseFormalizacao -> objetoAnaliseFormalizacao.alterarStatus("ENVIADO"));
         salvarDistribuicao(distribuicaoSelecionada);
         formalizacaoService.salvarFormalizacao(formalizacao);
     }
@@ -79,22 +82,20 @@ public class DistribuicaoFormalizacaoService {
         List<DistribuicaoFormalizacao> distribuicaoFormalizacaoLista =
                 distribuicaoFormalizacaoPersistenceAdapter.buscarDistribuicaoFormalizacaoPorListaDeTipoFormalizacao(tipoFormalizacaoLista);
 
-        //Validar se precisa ter retorno mesmo
-        List<DistribuicaoFormalizacao> distribuicaoFormalizacaoListaAlterada = alterarPorcentagem(distribuicaoFormalizacaoListaDto, distribuicaoFormalizacaoLista);
-        validarPorcentagem(tipoFormalizacaoLista, distribuicaoFormalizacaoListaAlterada);
-        distribuicaoFormalizacaoListaAlterada.forEach(DistribuicaoFormalizacao::zerarContadorDeDistribuicao);
-        salvarListaDistribuicao(distribuicaoFormalizacaoListaAlterada);
+        alterarPorcentagem(distribuicaoFormalizacaoListaDto, distribuicaoFormalizacaoLista);
+        validarPorcentagem(tipoFormalizacaoLista, distribuicaoFormalizacaoLista);
+        distribuicaoFormalizacaoLista.forEach(DistribuicaoFormalizacao::zerarContadorDeDistribuicao);
+        salvarListaDistribuicao(distribuicaoFormalizacaoLista);
 
-        return distribuicaoFormalizacaoMapper.converterParaDto(distribuicaoFormalizacaoListaAlterada);
+        return distribuicaoFormalizacaoMapper.converterParaDto(distribuicaoFormalizacaoLista);
     }
 
-    private List<DistribuicaoFormalizacao> alterarPorcentagem(List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoListaDto, List<DistribuicaoFormalizacao> distribuicaoFormalizacaoLista) {
+    private void alterarPorcentagem(List<DistribuicaoFormalizacaoDto> distribuicaoFormalizacaoListaDto, List<DistribuicaoFormalizacao> distribuicaoFormalizacaoLista) {
         distribuicaoFormalizacaoListaDto.forEach(distribuicaoDto -> {
             distribuicaoFormalizacaoLista.stream().filter(distribuicao -> distribuicao.getCodigoDistribuicaoFormalizacao() == distribuicaoDto.getCodigoDistribuicaoFormalizacao())
-                    .findFirst().orElseThrow(() -> new DistribuicaoException("Distribuicao Formalizacao com id " + distribuicaoDto.getCodigoDistribuicaoFormalizacao() + " nao encontrado na base de dados!"))
+                    .findFirst().orElseThrow(() -> new DistribuicaoNotFoundException("Distribuicao Formalizacao com id " + distribuicaoDto.getCodigoDistribuicaoFormalizacao() + " nao encontrado na base de dados!"))
                     .atualizarPorcentagem(distribuicaoDto.getPorcentagemDeDistribuicao());
         });
-        return distribuicaoFormalizacaoLista;
     }
 
     private void validarPorcentagem(List<TipoFormalizacao> tipoFormalizacaoLista, List<DistribuicaoFormalizacao> distribuicaoFormalizacaoLista) {
@@ -107,7 +108,7 @@ public class DistribuicaoFormalizacaoService {
                     .mapToDouble(DistribuicaoFormalizacao::getPorcentagemDeDistribuicao).sum();
 
             if (somaPorcentagem != 100)
-                throw new DistribuicaoException("Valor diferente de 100 na soma das porcentagens das distribuicoes de tipo formalizacao: " + tipoFormalizacao);
+                throw new DistribuicaoNotAcceptableException("Valor diferente de 100 na soma das porcentagens das distribuicoes de tipo formalizacao: " + tipoFormalizacao);
         });
     }
 

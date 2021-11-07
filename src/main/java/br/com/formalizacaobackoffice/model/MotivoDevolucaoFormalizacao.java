@@ -1,22 +1,22 @@
 package br.com.formalizacaobackoffice.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.ToString;
 
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor
-//TODO:Alterar nome para detalhe motivo devolucao
-//TODO: Extender de formalizacao ao inves de deixar no nome
+@ToString
 public class MotivoDevolucaoFormalizacao {
     private long codigoMotivoDevolucaoFormalizacao;
     private MotivoDevolucao motivoDevolucao;
     private String status;
-    //TODO: Adicionar um contador de vezes que foi devolvido, e data e hora
-    @Setter
+    //    private long contadorDeQuantidadeDeDevolucao;
     private ObjetoAnaliseFormalizacao objetoAnaliseFormalizacao;
+
+    public MotivoDevolucaoFormalizacao(long codigoMotivoDevolucaoFormalizacao, MotivoDevolucao motivoDevolucao, String status) {
+        this.codigoMotivoDevolucaoFormalizacao = codigoMotivoDevolucaoFormalizacao;
+        this.motivoDevolucao = motivoDevolucao;
+        this.status = status;
+    }
 
     public MotivoDevolucaoFormalizacao(MotivoDevolucao motivoDevolucao, String status) {
         this.motivoDevolucao = motivoDevolucao;
@@ -25,5 +25,9 @@ public class MotivoDevolucaoFormalizacao {
 
     public void alterarStatus(String novoStatus) {
         this.status = novoStatus;
+    }
+
+    public void atribuirObjetoAnaliseFormalizacao(ObjetoAnaliseFormalizacao objetoAnaliseFormalizacao) {
+        this.objetoAnaliseFormalizacao = objetoAnaliseFormalizacao;
     }
 }

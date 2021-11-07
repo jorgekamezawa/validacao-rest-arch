@@ -8,6 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface MotivoDevolucaoRepository extends JpaRepository<MotivoDevolucaoEntity, Long> {
-
     Optional<MotivoDevolucaoEntity> findByNomeMotivoDevolucao(String nomeMotivoDevolucao);
 }

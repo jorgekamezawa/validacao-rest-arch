@@ -1,5 +1,6 @@
 package br.com.formalizacaobackoffice.mapper;
 
+import br.com.formalizacaobackoffice.model.MotivoDevolucaoFormalizacao;
 import br.com.formalizacaobackoffice.model.ObjetoAnalise;
 import br.com.formalizacaobackoffice.model.ObjetoAnaliseFormalizacao;
 import br.com.formalizacaobackoffice.persistence.entity.MotivoDevolucaoFormalizacaoEntity;
@@ -54,11 +55,14 @@ public class ObjetoAnaliseFormalizacaoMapper {
 
     public ObjetoAnaliseFormalizacao converterParaModel(ObjetoAnaliseFormalizacaoEntity entity) {
         ObjetoAnalise objetoAnaliseModel = objetoAnaliseMapper.converterParaModel(entity.getObjetoAnaliseEntity());
+        List<MotivoDevolucaoFormalizacao> motivoDevolucaoFormalizacaoModelLista = entity.getMotivoDevolucaoFormalizacaoEntityLista().isEmpty() ? null :
+                motivoDevolucaoFormalizacaoMapper.converterParaModel(entity.getMotivoDevolucaoFormalizacaoEntityLista());
         return new ObjetoAnaliseFormalizacao(
                 entity.getCodigoObjetoAnaliseFormalizacao(),
                 entity.getFormalizacaoEntity().getCodigoFormalizacao(),
                 objetoAnaliseModel,
                 entity.getStatusAnalise(),
+                motivoDevolucaoFormalizacaoModelLista,
                 entity.getCodigoImagem()
         );
     }

@@ -53,13 +53,11 @@ public class TipoFormalizacaoMapper {
         ProcessoEntity processoEntity = processoMapper.converterParaEntity(model.getProcesso());
         OrigemEntity origemEntity = origemMapper.converterParaEntity(model.getOrigem());
         SegmentacaoEntity segmentacaoEntity = segmentacaoMapper.converterParaEntity(model.getSegmentacao());
-        List<ObjetoAnaliseEntity> objetoAnaliseEntityLista = objetoAnaliseMapper.converterParaEntity(model.getObjetoAnaliseLista());
         return new TipoFormalizacaoEntity(
                 model.getCodigoTipoFormalizacao(),
                 processoEntity,
                 origemEntity,
-                segmentacaoEntity,
-                objetoAnaliseEntityLista
+                segmentacaoEntity
         );
     }
 
